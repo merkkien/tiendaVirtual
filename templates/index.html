@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ventas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    <style>
+      .container {
+        max-width: 1000px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Ventas</a></li>
+        <li role="presentation"><a href="/about">Acerca de</a></li>
+    </ul>
+    <div class="container">
+      <h1>Ventas</h1>
+      <div>
+        <table   id="table"
+        data-search="true"
+        data-show-toggle="true"
+        data-show-fullscreen="true"
+        data-show-columns="true"
+        data-show-columns-toggle-all="true"
+        data-minimum-count-columns="2"
+        data-pagination="true"
+        data-page-list="[10, 25, 50, 100, all]">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fecha venta</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Descuento</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for venta in ventas %}
+            <tr>
+              <th scope="row">{{venta.detalleId}}</th>
+              <td>{{venta.venta.fechaCreacion}}</td>
+              <td>{{venta.producto.nombre}}</td>
+              <td>{{venta.producto.categoria.nombre}}</td>
+              <td>{{venta.cantidad}}</td>
+              <td>{{venta.valor}}</td>
+              <td>{{venta.valorDescuento}}</td>
+              <td>{{venta.venta.estado}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="//code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table-locale-all.min.js"></script>
+    <script>
+      var $table = $('#table')
+      
+      function initTable() {
+        
+        $table.bootstrapTable('destroy').bootstrapTable({
+          height: 550,
+          locale:'es-MX'  
+        })
+      }
+    
+      $(function() {
+        initTable()
+      })
+    </script>
+</body>
+</html>
